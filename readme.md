@@ -7,6 +7,8 @@ I've been using PancakeApp for a few years now, and I've found it very useful an
 there are features that I'd like to see added and I just prefer working with Laravel over CodeIgniter, so I'm rebuilding
 Pancakeapp in Laravel - partly as a learning exercise and partly so I can have a bit more freedom with the UI. While 
 CodeIgniter has its advantages, I feel that Laravel is much more elegant. 
+
+To be clear, I'm not copying and pasting code here, I'm merely building the app from the ground up around the pancakeapp database.
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).

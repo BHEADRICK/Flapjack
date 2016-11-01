@@ -13,8 +13,14 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
-
 const app = new Vue({
-    el: '#app'
+    el: 'body',
+
+    ready: function(){
+        this.$http.get('/api/tasks', function(data, status, request){
+            this.$set('tasks', $data);
+            console.log($data);
+        })
+    }
+
 });

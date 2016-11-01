@@ -16,5 +16,12 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::group(array('before' => 'auth'), function(){
+    // your routes
 
-Route::get('/home', 'HomeController@index');
+    Route::get('/', 'HomeController@index');
+
+    Route::resource('admin', 'Admin\AdminController');
+});
+
+

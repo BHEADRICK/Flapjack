@@ -19,6 +19,10 @@ Route::get('/user', function (Request $request) {
 
 
 Route::get('/tasks', function (){
-    return App\ProjectTask::latest()->limit(6)->get();
+    return App\ProjectTask::latest()->with('project')->limit(6)->get();
+});
+
+Route::get('/projects', function(){
+   return \App\Project::latest()->with('client')->limit(6)->get();
 });
 

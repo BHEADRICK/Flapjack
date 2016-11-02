@@ -16,5 +16,5 @@ require('laravel-elixir-vue-2');
 
 elixir(function(mix)  {
     mix.sass('app.scss')
-       .browserify('app.js').rollup();
+        .webpack('app.js');
 });

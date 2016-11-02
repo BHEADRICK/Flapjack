@@ -12,15 +12,30 @@ require('./bootstrap');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+var process;
+var tasks, projects;
 const app = new Vue({
-    el: 'body',
+    el:'#app',
 
-    ready: function(){
-        this.$http.get('/api/tasks', function(data, status, request){
-            this.$set('tasks', $data);
-            console.log($data);
-        })
-    }
+    data: {tasks, projects
+    , message: "word up"},
+created:function() {
+this.fetchTasks();
+},
+    methods: {
+        fetchTasks: function () {
+
+
+            this.$http.get('/api/tasks').then( (data)=>{
+               this.$set(this,'tasks', data.body);
+
+            })
+        },
+        fetchProjects: function(){
+            this.$http.get('/api/projects').then( (data)=>{
+                this.$set(this,'projects', data.body);
+
+            })
+        }    },
 
 });

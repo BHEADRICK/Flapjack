@@ -17,7 +17,7 @@ class CreatePancakeClientsCreditAlterationsTable extends Migration {
 			$table->increments('id');
 			$table->integer('client_id');
 			$table->decimal('amount', 65, 10);
-			$table->timestamp('created_at')->nullable()->default(DB::raw('CURRENT_TIMESTAMP'));
+
 		});
 	}
 

@@ -13,14 +13,16 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 var process;
-var tasks, projects;
+var tasks, projects, invoices;
 const app = new Vue({
     el:'#app',
 
-    data: {tasks, projects
+    data: {tasks, projects, invoices
     , message: "word up"},
 created:function() {
 this.fetchTasks();
+    this.fetchProjects();
+    this.fetchInvoices();
 },
     methods: {
         fetchTasks: function () {
@@ -36,6 +38,13 @@ this.fetchTasks();
                 this.$set(this,'projects', data.body);
 
             })
-        }    },
+        }  ,
+        fetchInvoices: function(){
+            this.$http.get('/api/invoices').then((data)=>{
+                this.$set(this, 'invoices', data.body);
+            })
+        }
+
+},
 
 });

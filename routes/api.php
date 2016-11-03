@@ -19,10 +19,13 @@ Route::get('/user', function (Request $request) {
 
 
 Route::get('/tasks', function (){
-    return App\ProjectTask::latest()->with('project')->limit(6)->get();
+    return App\Models\ProjectTask::latest()->with('project')->limit(6)->get();
 });
 
 Route::get('/projects', function(){
-   return \App\Project::latest()->with('client')->limit(6)->get();
+   return \App\Models\Project::latest()->with('client')->limit(6)->get();
 });
 
+Route::get('/invoices', function(){
+    return \App\Models\Invoice::where('is_paid',false)->latest()->with('client')->limit(6)->get();
+});

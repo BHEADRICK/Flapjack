@@ -53,11 +53,11 @@
                                </div>
                                <div class="col-lg-3">
                                    <h3 class="dashboard-title">Your Projects</h3>
-                                <div class="projects-container">
-                                   <div class="row" style="margin-bottom: 1em;" v-for="project in projects">
+                                <div class="projects-container list-group">
+                                   <div class="row list-group-item" style="margin-bottom: 1em;" v-for="project in projects">
                                        <div class="col-lg-12">
                                            <p style="margin:0; padding:0; font-size: 1.2em; line-height: 1.2em"><a href="#">@{{ project.name }}</a></p>
-                                           <p style="margin: 0"><i>project.client</i></p><i>
+                                           <p style="margin: 0"><i>@{{ project.client.first_name + ' ' + project.client.last_name + ' - ' + project.client.company }}</i></p><i>
                                            </i></div><!-- /eight columns --><i>
 
                                        </i></div>
@@ -72,6 +72,11 @@
                     <div class="row">
                         <div class="col-lg-4"> <div class="panel panel-default">
                                 <h3 class="dashboard-title">Outstanding Invoices</h3>
+                                <ul class="activity list-group">
+                                    <li class="activity-invoice-viewed list-group-item" v-for="invoice in invoices">
+                                        #<a href="#" class="email" title="Send to client">@{{ invoice.id }}</a>    @{{  invoice.client.first_name + ' ' + invoice.client.last_name + ' - ' + invoice.client.company }}              <span style="color: #CA6040;">$  @{{ invoice.amount }}</span><br>
+                                        <i class="fa fa-calendar"></i> <strong>(some date)</strong> | Sent on (some date)            </li>
+                                </ul>
                             </div></div>
                         <div class="col-lg-4"> <div class="panel panel-default">
                                 <h3 class="dashboard-title">Client Activity</h3>

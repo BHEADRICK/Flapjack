@@ -26,5 +26,13 @@ class Notification extends Model
 
     protected $guarded = [];
 
-        
+
+    public function client()
+    {
+        return $this->belongsTo('App\Models\Client');
+    }
+
+    public function invoice(){
+        return $this->belongsTo('App\Models\Invoice');
+    }
 }

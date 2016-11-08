@@ -57,7 +57,7 @@
                                    <div class="row list-group-item" style="margin-bottom: 1em;" v-for="project in projects">
                                        <div class="col-lg-12">
                                            <p style="margin:0; padding:0; font-size: 1.2em; line-height: 1.2em"><a href="#">@{{ project.name }}</a></p>
-                                           <p style="margin: 0"><i>@{{ project.client.first_name + ' ' + project.client.last_name + ' - ' + project.client.company }}</i></p><i>
+                                           <p style="margin: 0"><i>@{{ formatClient(project.client) }}</i></p><i>
                                            </i></div><!-- /eight columns --><i>
 
                                        </i></div>
@@ -74,15 +74,102 @@
                                 <h3 class="dashboard-title">Outstanding Invoices</h3>
                                 <ul class="activity list-group">
                                     <li class="activity-invoice-viewed list-group-item" v-for="invoice in invoices">
-                                        #<a href="#" class="email" title="Send to client">@{{ invoice.id }}</a>    @{{  invoice.client.first_name + ' ' + invoice.client.last_name + ' - ' + invoice.client.company }}              <span style="color: #CA6040;">$  @{{ invoice.amount }}</span><br>
-                                        <i class="fa fa-calendar"></i> <strong>(some date)</strong> | Sent on (some date)            </li>
+                                        #<a href="#" class="email" title="Send to client">@{{ invoice.id }}</a>    @{{ formatClient(invoice.client) }}              <span style="color: #CA6040;">$  @{{ parseFloat(invoice.amount).toFixed(2) }}</span><br>
+                                        <i class="fa fa-calendar"></i> <strong>@{{ mmnt(invoice.date_entered, 'MM/DD/YYYY')  }}</strong> | Sent on @{{  mmnt(invoice.date_entered,"MM/DD/YYYY" )   }}          </li>
                                 </ul>
                             </div></div>
                         <div class="col-lg-4"> <div class="panel panel-default">
                                 <h3 class="dashboard-title">Client Activity</h3>
+
+                                <ol class="activity list-group">
+                                    <li class="activity-invoice-viewed list-group-item" v-for="notification in notifications">
+                                      {{--<span v-if="notification.message.length>0">@{{ notification.message }}</span>--}}
+                                        {{--<span v-else>--}}
+
+                                            <strong class="client-name">@{{formatClient(notification.client)}}</strong>
+
+                                       @{{  notification.action }} <a href="#" v-if="notification.invoice!=null">invoice</a> on <span class="date">@{{ mmnt(notification.created,'MM/DD/YYYY h:mm a') }}</span>
+                                        {{--</span>--}}
+
+                                                   </li>
+                                </ol>
                             </div></div>
                         <div class="col-lg-4"> <div class="panel panel-default">
                                 <h3 class="dashboard-title">Snapshot</h3>
+                                <div class="snapshot">
+                                    <p class="since">Since <a href="/admin/settings">@{{ mmnt(snapshot.date, 'MM/DD/YYYY') }}</a></p>
+
+                                    <div class="row">
+                                        <div class="six columns paid">
+                                            <h5>Paid</h5>
+                                            <h4>
+                                                <i class="fa fa-check-circle"></i>
+                                                <a href="/reports/payments/view/from:-to:0-client:0">$ @{{ currency(snapshot.paid) }}</a>
+                                            </h4>
+                                        </div>
+                                        <div class="six columns overdue">
+                                            <h5>Overdue</h5>
+                                            <h4>
+                                                <i class="fa fa-exclamation-circle"></i>
+                                                <a href="/admin/invoices/overdue">$ @{{ currency(snapshot.unpaid) }}</a>
+                                            </h4>
+                                        </div>
+                                        <div class="six columns outstanding">
+                                            <h5>Outstanding</h5>
+                                            <h4>
+                                                <a href="/admin/invoices/unpaid">$ 550.00</a>
+                                            </h4>
+                                        </div>
+                                        <div class="six columns unpaid">
+                                            <h5>Unpaid</h5>
+                                            <h4>
+                                                <a href="/admin/invoices/all_unpaid">$ 550.00</a>
+                                            </h4>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="six columns">
+                                            <h5>
+                                                <a href="https://project.catmanstudios.com/admin/timesheets/filter/all/2016-01-01">
+                                                    Hours worked<br>
+                                                    <span>26.38</span>
+                                                </a>
+                                            </h5>
+                                        </div>
+                                        <div class="six columns">
+                                            <h5>
+                                                <a>
+                                                    Timers Running<br>
+                                                    <span>0</span>
+                                                </a>
+                                            </h5>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="six columns">
+                                            <h5>
+                                                <a href="https://project.catmanstudios.com/admin/projects/" title="Total Projects">
+                                                    Total Projects<br>
+                                                    <span>143</span>
+                                                </a>
+                                            </h5>
+                                        </div>
+                                        <div class="six columns">
+                                            <h5>
+                                                <a href="https://project.catmanstudios.com/admin/clients/">
+                                                    Total Clients<br>
+                                                    <span>56</span>
+                                                </a>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
                             </div></div>
                     </div>
                 </div>

@@ -10,6 +10,16 @@ window._ = require('lodash');
 window.$ = window.jQuery = require('jquery');
 require('bootstrap-sass');
 
+// $(document).ready(function(){
+//     $("#menu").overflowNavs({
+//         "more" : "More",
+//         "parent" : ".nav-collapse",
+//         "override_width" : true
+//     });
+// })
+
+var fa = require("fontawesome");
+
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
  * using reactive data binding and reusable components. Vue's API is clean
@@ -18,6 +28,10 @@ require('bootstrap-sass');
 
 window.Vue = require('vue');
 require('vue-resource');
+
+window.moment = require('moment');
+
+
 
 /**
  * We'll register a HTTP interceptor to attach the "CSRF" header to each of

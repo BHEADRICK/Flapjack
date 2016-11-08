@@ -13,37 +13,58 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 var process;
-var tasks, projects, invoices;
+var tasks, projects, invoices, notifications, snapshot;
 const app = new Vue({
     el:'#app',
 
-    data: {tasks, projects, invoices
-    , message: "word up"},
+    data: {tasks, projects, invoices, notifications, snapshot
+    },
 created:function() {
 this.fetchTasks();
     this.fetchProjects();
     this.fetchInvoices();
-},
+    this.fetchNotifications();
+    this.fetchSnapshot();
+},filters: {
+        moment: function (date) {
+            return moment(date).format('MMMM Do YYYY, h:mm:ss a');
+        }
+    },
     methods: {
-        fetchTasks: function () {
-
-
-            this.$http.get('/api/tasks').then( (data)=>{
-               this.$set(this,'tasks', data.body);
+        formatClient: function(client){
+            if(client)
+            return client.first_name + ' ' + client.last_name + ' - ' + client.company;
+        },
+        mmnt: function(date, format){
+            return  moment(new Date(Date(date)).toISOString()).format( format )
+        },
+        currency(number){
+            return parseFloat(number).toFixed(2);
+        },
+        fetchThings: function(path, variable){
+            this.$http.get('/api/'+path).then( (data)=>{
+                this.$set(this,variable, data.body);
 
             })
         },
-        fetchProjects: function(){
-            this.$http.get('/api/projects').then( (data)=>{
-                this.$set(this,'projects', data.body);
+        fetchTasks: function () {
 
-            })
+            this.fetchThings('tasks', 'tasks');
+
+        },
+        fetchProjects: function(){
+           this.fetchThings('projects', 'projects');
         }  ,
         fetchInvoices: function(){
-            this.$http.get('/api/invoices').then((data)=>{
-                this.$set(this, 'invoices', data.body);
-            })
+            this.fetchThings('invoices', 'invoices');
+        },
+        fetchNotifications: function(){
+this.fetchThings('notifications', 'notifications');
+        },
+        fetchSnapshot: function(){
+            this.fetchThings('snapshot', 'snapshot');
         }
+
 
 },
 

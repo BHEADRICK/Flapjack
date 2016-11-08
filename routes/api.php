@@ -29,3 +29,19 @@ Route::get('/projects', function(){
 Route::get('/invoices', function(){
     return \App\Models\Invoice::where('is_paid',false)->latest()->with('client')->limit(6)->get();
 });
+
+Route::get('/notifications', function(){
+   return \App\Models\Notification::where('client_id','>',0)->latest()->with('client')->with('invoice')->limit(6)->get();
+});
+
+Route::get('/snapshot', function(){
+
+
+    $return = new \stdClass();
+    $return->date = mktime(0,0,0,1,1,date('y'));
+    $return->paid = \App\Models\Invoice::where('is_paid', 1)->where('date_entered','>', $return->date)->sum('amount');
+    $return->unpaid = \App\Models\Invoice::where('is_paid', 0)->where('date_entered','>', $return->date)->sum('amount');
+    $return->partial =DB::table('invoices')->join('partial_payments','partial_payments.unique_invoice_id','invoices.unique_id' )->where('invoices.is_paid', 0)->where('date_entered','>', $return->date)->sum('partial_payments.amount');
+
+    return json_encode($return);
+});

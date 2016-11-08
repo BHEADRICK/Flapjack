@@ -58,6 +58,29 @@ class Invoice extends Model
     public function client(){
     return $this->belongsTo('App\Models\Client');
 }
+public function project(){
+    return $this->belongsTo('App\Models\Project');
+}
+
+public function partial_payments(){
+    return $this->hasmany('app\Models\PartialPayment');
+}
+
+public function getStatusAttribute($status){
+if(empty($status)){
+    if($this->is_paid){
+        return 'Paid';
+    }else{
+        if(time()>$this->due_date){
+            return 'Overdue';
+        }else{
+            return 'Awaiting Payment';
+        }
+    }
+
+
+}
+}
 
         
 }

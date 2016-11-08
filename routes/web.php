@@ -21,7 +21,12 @@ Route::group(array('before' => 'auth'), function(){
 
     Route::get('/', 'HomeController@index');
 
+    Route::resource('admin/invoices','InvoicesController');
+
+
     Route::resource('admin', 'Admin\AdminController');
+
+
 });
 
 

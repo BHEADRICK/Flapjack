@@ -18,8 +18,18 @@
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
-            <ul class="nav navbar-nav">
-                &nbsp;
+            <ul id="menu" class="nav navbar-nav">
+                &nbsp;<li><a href="/admin/timers">Timers</a> </li>
+                <li><a href="/admin/invoices">Invoices</a></li>
+                <li><a href="/admin/estimates">Estimates</a></li>
+                <li><a href="/admin/projects">Projects</a></li>
+                <li><a href="/admin/expenses">Expenses</a></li>
+                <li><a href="/admin/proposals">Proposals</a></li>
+                <li><a href="/admin/tickets">Tickets</a></li>
+                <li><a href="/admin/reports">Reports</a></li>
+                <li><a href="/admin/clients">Clients</a></li>
+                <li><a href="/admin/users">Users</a></li>
+                <li><a href="/admin/credit-notes">Credit Notes</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->

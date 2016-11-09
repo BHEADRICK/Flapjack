@@ -8091,4 +8091,51 @@ button.close {
   overflow: visible;
   clip: auto; }
 
+.item-name {
+  width: 24%; }
+
+.item-qty {
+  width: 9.5%; }
+
+.item-amount {
+  width: 9.5%; }
+
+.item-discount {
+  width: 9.5%; }
+
+.item-rate {
+  width: 10%; }
+
+.item-tax {
+  width: 15%; }
+
+.item-type {
+  width: 15%; }
+
+.item-cost {
+  width: 10%; }
+
+.item-description {
+  width: 100%; }
+
+th, td {
+  float: left;
+  display: inline-block; }
+
+html {
+  position: relative;
+  min-height: 100%; }
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px; }
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5; }
+
 /*# sourceMappingURL=app.css.map */

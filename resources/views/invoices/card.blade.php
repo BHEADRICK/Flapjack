@@ -15,7 +15,7 @@
 
                                 <span class="invoice-client">
         invoice                                    <a
-                                            href="/admin/invoices/edit/{{$invoice->unique_id}}">#{{$invoice->id}}</a></span>
+                                            href="/admin/invoices/{{$invoice->unique_id}}/edit">#{{$invoice->id}}</a></span>
 
                         <span class="invoice-company">(<a class="color-inherit"
                                                           href="/admin/clients/view/{{$invoice->client->id}}">{{$invoice->client->display_name}}</a>)</span>
@@ -85,7 +85,7 @@
             <div>
 
                 <p class="no-bottom">
-                    <small>Due: 11/04/2016</small>
+                    <small>Due: {{$invoice->due_date}}</small>
                 </p>
 
                 <span class="total-amount half-bottom">

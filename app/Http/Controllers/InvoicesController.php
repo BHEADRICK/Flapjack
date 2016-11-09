@@ -67,8 +67,15 @@ class InvoicesController extends Controller
      */
     public function edit($id)
     {
-        //
-        return 'edit';
+        $gateways = ['check_m'=>'Check', 'paypal_m'=>'Paypal', 'stripe_m'=>'Stripe'];
+        if(is_numeric($id)){
+            $invoice = Invoice::find($id);
+        }else{
+            $invoice = Invoice::where('unique_id', $id);
+        }
+
+        return view('invoices.edit', compact('invoice', 'gateways'));
+
     }
 
     /**

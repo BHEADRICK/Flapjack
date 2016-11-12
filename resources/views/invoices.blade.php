@@ -20,4 +20,9 @@
 
         </div>
     </div>
+
 @endsection
+
+@push('scripts')
+<script src="{{elixir('/js/app.js')}}"></script>
+@endpush

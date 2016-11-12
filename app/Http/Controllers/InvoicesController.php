@@ -71,7 +71,7 @@ class InvoicesController extends Controller
         if(is_numeric($id)){
             $invoice = Invoice::find($id);
         }else{
-            $invoice = Invoice::where('unique_id', $id);
+            $invoice = Invoice::where('unique_id', $id)->first();
         }
 
         return view('invoices.edit', compact('invoice', 'gateways'));

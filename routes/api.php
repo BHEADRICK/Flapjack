@@ -45,3 +45,16 @@ Route::get('/snapshot', function(){
 
     return json_encode($return);
 });
+
+Route::get('invoice-lines/{id}', function($id){
+
+    return \App\Models\InvoiceRow::where('unique_id', $id)->get();
+});
+
+Route::put('invoice-lines/{id}', function($id){
+    return \App\Models\InvoiceRow::create(['unique_id'=>$id]);
+});
+
+Route::delete('invoice-lines/{id}', function($id){
+   return \App\Models\InvoiceRow::destroy($id);
+});

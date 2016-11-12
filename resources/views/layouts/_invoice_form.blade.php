@@ -1,5 +1,12 @@
 {!! BootForm::textarea('Description', 'description')->rows('4') !!}
+
+<script>
+    window.unique_id = "{{$invoice->unique_id}}"
+</script>
+<h3>Line Items</h3>
+
 <table>
+    <thead>
     <tr>
         <th class="item-name">Item Name</th>
         <th class="item-qty">Qty/Hrs</th>
@@ -11,28 +18,52 @@
         <th class="item-cost">Cost</th>
         <th class="item-actions">Actions</th>
     </tr>
-    <tr><td>
-            <table>
-                <tr>
-                    <td class="item-name">{!! BootForm::text('', 'invoice_item[name][]') !!}</td>
-                    <td class="item-qty">{!! BootForm::text('', 'invoice_item[qty][]') !!}</td>
-                    <td class="item-rate">{!! BootForm::text('', 'invoice_item[rate][]') !!}</td>
-                    <td class="item-tax">{!! BootForm::select('', 'invoice_item[tax_id][]')->options(['wod']) !!} </td>
-                    <td class="item-type">{!! BootForm::select('', 'invoice_item[item_type_id][]')->options(['word']) !!}</td>
+    </thead>
+    <tbody class="ui-sortable">
+    <tr v-for="item in items">
+        <td colspan="8"><table >
 
-                    <td class="item-discount">{!! BootForm::text('', 'invoice_item[discount][]') !!}</td>
-                    <td class="item-cost">{!! BootForm::hidden('invoice_item[cost][]') !!}</td>
-                    <td class="item-actions">blah</td>
+                <tr><td>
+                        <table>
+                            <tr>
+                                <td class="item-name">
 
-                </tr>
-                <tr>
-                    <td class="item-description">
-                    {!! BootForm::textarea('', 'invoice_item[description][]')->placeholder('description') !!}
-                    </td>
-                </tr>
-            </table>
-        </td></tr>
+                                    {!! BootForm::text('', 'invoice_item[name][]')->attribute('v-model', 'item.name') !!}</td>
+                                <td class="item-qty">{!! BootForm::text('', 'invoice_item[qty][]')->attribute('v-model','item.qty') !!}</td>
+                                <td class="item-rate">{!! BootForm::text('', 'invoice_item[rate][]')->attribute('v-model','item.rate') !!}</td>
+                                <td class="item-tax">{!! BootForm::select('', 'invoice_item[tax_id][]')->options(['wod'])->attribute('v-model','item.tax_id') !!} </td>
+                                <td class="item-type">{!! BootForm::select('', 'invoice_item[item_type_id][]')->options(['word'])->attribute('v-model','item.item_type_id') !!}</td>
+
+                                <td class="item-discount">{!! BootForm::text('', 'invoice_item[discount][]')->attribute('v-model','item.discount') !!}</td>
+                                <td class="item-cost">{!! BootForm::hidden('invoice_item[cost][]')->attribute('v-model', 'item.cost') !!} <div class="form-group">cost</div></td>
+                                <td class="item-actions"><div class="form-group">
+                                        <a href="javascript:void(null)" v-on:click="deleteItem(item.id)" class="delete-item">   <i class="fa fa-trash fa-1 " aria-hidden="true"></i></a>
+                                    </div></td>
+
+                            </tr>
+                            <tr>
+                                <td class="item-description">
+                                    {!! BootForm::textarea('', 'invoice_item[description][]')->placeholder('description')->rows(2) !!}
+                                </td>
+                            </tr>
+                        </table>
+                    </td></tr>
+            </table></td>
+    </tr>
+
+    </tbody>
+    <tfoot>
+<tr>
+    <td class="lines-total" colspan="8">
+Total Amount: <span class="symbol">$</span><span class="value">@{{ items_total }}</span>
+    </td>
+</tr>
+    </tfoot>
 </table>
+
+
+
+<a href="javascript:void(null)" class="btn btn-default" v-on:click="addInvoiceItem">Add Item</a>
 {!! BootForm::textarea('Notes', 'notes') !!}
 
 <h3>Files</h3>
@@ -63,4 +94,6 @@
 <br class="clear">
 <button class="btn btn-primary">Save!</button>
 
-
+@push('scripts')
+<script src="{{elixir('/js/invoice.js')}}"></script>
+@endpush

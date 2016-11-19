@@ -3,6 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
+            <h1>Edit Invoice #{{$invoice->invoice_number}}</h1>
 {!! BootForm::open() !!}
             {!! Bootform::bind($invoice) !!}
                 <div class="col-lg-9">

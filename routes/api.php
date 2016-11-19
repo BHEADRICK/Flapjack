@@ -58,3 +58,28 @@ Route::put('invoice-lines/{id}', function($id){
 Route::delete('invoice-lines/{id}', function($id){
    return \App\Models\InvoiceRow::destroy($id);
 });
+Route::get('invoice-payment/{payment_id}/paid', function($payment_id){
+
+    $payment = \App\Models\PartialPayment::find($payment_id);
+    $payment->update(['is_paid'=>true]);
+
+    return  \App\Models\PartialPayment::where('unique_invoice_id', $payment->unique_invoice_id)->get();
+});
+Route::get('invoice-payments/{id}', function($id){
+   return  \App\Models\PartialPayment::where('unique_invoice_id', $id)->get();
+});
+
+Route::put('invoice-payment/{id}', function($id){
+   return  \App\Models\PartialPayment::create(['unique_invoice_id'=> $id]);
+});
+Route::delete('invoice-payment/{id}', function($id){
+   return \App\Models\PartialPayment::destroy($id);
+});
+
+Route::get('clients/list', function(){
+   return \App\Models\Client::get(['id', 'first_name', 'last_name', 'company']);
+});
+
+Route::get('projects/list/{client_id}', function($client_id){
+   return \App\Models\Project::where('client_id', $client_id)->where('is_archived',false)->get(['id', 'name']);
+});

@@ -10,8 +10,9 @@
                     <ul class="list-group">
 
                         @foreach($invoices as $invoice)
-
+                            @if($invoice->client)
                             @include('invoices/card', [$invoice])
+                            @endif
                             @endforeach
 
 

@@ -20,7 +20,21 @@
             <!-- Left Side Of Navbar -->
             <ul id="menu" class="nav navbar-nav">
                 &nbsp;<li><a href="/admin/timers">Timers</a> </li>
-                <li><a href="/admin/invoices">Invoices</a></li>
+                <li clas="dropdown">
+                    <a href="javascript:void(null)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                     Invoices  <span class="caret"></span>
+                    </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/admin/invoices">All Invoices</a></li>
+                    <li><a href="/admin/invoices/create">Create New Invoice</a></li>
+                    <li><a href="/admin/invoices/paid">Paid</a></li>
+                    <li><a href="/admin/invoices/unpaid">Unpaid</a></li>
+                    <li><a href="/admin/invoices/overdue">Overdue</a></li>
+                    <li><a href="/admin/invoices/unsent">Unsent</a></li>
+                    <li><a href="/admin/invoices/recurring">Recurring</a></li>
+                    <li><a href="/admin/invoices/archived">Archived</a></li>
+                </ul>
+                </li>
                 <li><a href="/admin/estimates">Estimates</a></li>
                 <li><a href="/admin/projects">Projects</a></li>
                 <li><a href="/admin/expenses">Expenses</a></li>

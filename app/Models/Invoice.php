@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Hashids\Hashids;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -10,6 +11,16 @@ use Illuminate\Database\Eloquent\Model;
 class Invoice extends Model
 {
 
+    public function save(array $options=[])
+    {
+        // code before save
+        $hashids = new Hashids();
+
+        $this->unique_id = $hashids->encode(time());
+
+        parent::save($options);
+        //code after save
+    }
 
     public $timestamps = true;
 
@@ -65,7 +76,14 @@ public function project(){
 public function partial_payments(){
     return $this->hasmany('app\Models\PartialPayment');
 }
+public function getDateEnteredAttribute($value){
+    if(is_numeric($value)){
+        return date('Y-m-d', $value);
+    }else{
+        return $value;
+    }
 
+}
 public function getStatusAttribute($status){
 if(empty($status)){
     if($this->is_paid){

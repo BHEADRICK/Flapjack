@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Hashids\Hashids;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -10,6 +11,13 @@ use Illuminate\Database\Eloquent\Model;
 class PartialPayment extends Model
 {
 
+    public function save(array $options = []){
+
+        $hashids = new Hashids();
+
+        $this->unique_id = $hashids->encode(time());
+        parent::save();
+    }
 
     public $timestamps = true;
 

@@ -17,6 +17,7 @@ require('laravel-elixir-vue-2');
 
 elixir(function(mix)  {
     mix.sass('app.scss')
+        .copy('node_modules/bootstrap-sass/assets/fonts', 'public/css/fonts')
         .copy('./bower_components/font-awesome/fonts', 'public/build/fonts')
         .webpack( 'app.js' )
         .webpack('invoice.js')

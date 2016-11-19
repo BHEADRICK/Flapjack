@@ -1,9 +1,23 @@
 
-{!! BootForm::select( 'Client', 'client_id')->options([]) !!}
+<div class="form-group">
+    <label for="client_id" class="control-label">Client</label>
+    <select name="client_id" v-model="client_id" id="client_id" class="form-control" required>
+        <option value="0" >Select client</option>
+        <option v-bind:value="client.id" v-for="client in clients">@{{displayClient(client)}}</option>
+    </select></div>
 <button>add Client</button>
 
+<input type="hidden" id="client_id_value" value="{{$invoice->client_id}}">
+<input type="hidden" id="project_id_value" value="{{$invoice->project_id}}">
 
-{!! BootForm::select('Project','project_id')->options([]) !!}
+<div class="form-group">
+    <label for="project_id" class="control-label">Project</label>
+    <select name="project_id" v-model="project_id" id="project_id" class="form-control">
+        <option value="0">No Project</option>
+        <option v-bind:value="project.id" v-for="project in projects">@{{ project.name }}</option>
+    </select></div>
+
+
 
 {!! BootForm::text( 'Invoice #','invoice_number') !!}
 

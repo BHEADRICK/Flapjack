@@ -10,6 +10,7 @@
                 </div><!-- /three -->
 
                 <div class="col-lg-9 mobile-four">
+
                     <h4 class="half-bottom">
 
 
@@ -18,7 +19,7 @@
                                             href="/admin/invoices/{{$invoice->unique_id}}/edit">#{{$invoice->id}}</a></span>
 
                         <span class="invoice-company">(<a class="color-inherit"
-                                                          href="/admin/clients/view/{{$invoice->client->id}}">{{$invoice->client->display_name}}</a>)</span>
+                                                          href="/admin/clients/{{$invoice->client->id}}">{{$invoice->client->display_name}}</a>)</span>
                         <div class="invoice-details">
                             Last viewed by the client on {{$invoice->last_viewed}}.<br>
                             Email: {{$invoice->client->email}}
@@ -26,19 +27,24 @@
                         </div>
 
                     </h4>
+
+
                     <p>
                         <small>{{$invoice->description}}</small>
                     </p>
                 </div><!-- /ten -->
             </div><!-- /row -->
 
-<nav class="navbar navbar-default navbar-fixed-bottom"></nav>
+            <nav class="navbar navbar-default navbar-fixed-bottom"></nav>
             <div class="row fixed-bottom">
                 <div class="col-lg-3 col-sm-2">
                     <ul class="invoice-buttons nav navbar-nav">
-                        <li><a href="/{{$invoice->unique_id}}" class="preview" title="View"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
+                        <li><a href="/{{$invoice->unique_id}}" class="preview" title="View"><i class="fa fa-eye"
+                                                                                               aria-hidden="true"></i></a>
+                        </li>
                         <li><a class="email" href="/admin/invoices/created/{{$invoice->unique_id}}"
-                               title="Email invoice To Client"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
+                               title="Email invoice To Client"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+                        </li>
                         <li><a class="settings" href="#"><i class="fa fa-cog" aria-hidden="true"></i></a>
                             <ul class="settings-dropdown dropdown-menu more-actions">
                                 <li><a href="/pdf/{{$invoice->unique_id}}">View PDF</a></li>
@@ -69,8 +75,7 @@
                 </div><!-- /two -->
 
                 <div class="col-lg-9 col-sm-4 invoice-total">
-                    <div style="float: right;">
-                                                                                                                                                                                <span class="invoice-unpaid">
+                    <div style="float: right;">        <span class="invoice-unpaid">
                                                 Unpaid: $  150.00                                            </span>
                     </div>
 

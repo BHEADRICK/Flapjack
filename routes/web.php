@@ -23,6 +23,24 @@ Route::group(array('before' => 'auth'), function(){
 
     Route::resource('admin/invoices','InvoicesController');
 
+    Route::resource('admin/clients', 'ClientsController');
+
+    Route::resource('admin/projects', 'ProjectsController');
+
+
+    Route::resource('admin/expenses', 'ExpensesController');
+
+    Route::resource('admin/proposals', 'ProposalsController');
+
+    Route::resource('admin/tickets', 'TicketsController');
+
+    Route::resource('admin/repports', 'ReportsController');
+
+    Route::resource('admin/credit-notes', 'CreditNotesController');
+
+
+
+
 
     Route::resource('admin', 'Admin\AdminController');
 
